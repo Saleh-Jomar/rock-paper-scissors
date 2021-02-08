@@ -10,19 +10,19 @@
         let computerScore = 0;
         
         let computerPlay = () => playArray[Math.floor(Math.random()*3)];
-        let playerPlay = () => {
-            playerHand = ''
-            while (!(playArray.includes(playerHand))){
-                playerHand = prompt('Rock, Paper, Scissor? ');
-                if ((playerHand==null||playerHand=='')){
-                    break;
-                }
-                else{
-                    playerHand = playerHand[0].toUpperCase() + playerHand.slice(1).toLowerCase();
-                    if (!(playArray.includes(playerHand))) alert('Please pick from the choices.');
-                }   
-            } 
-            return playerHand;         
+        
+        function playerPlay(){
+            playerHand = prompt('Rock, Paper, Scissors?');
+            if (playerHand==null||playerHand==''){
+                return playerHand;
+            }
+            else if(playArray.includes(capitalize(playerHand))){
+                return capitalize(playerHand);
+            }
+            else{
+                alert('Please pick from the choices!')
+                return playerPlay();
+            }  
         }
 
         function playRound(playerSelection,computerSelection){
@@ -46,9 +46,12 @@
             playerScore=0;
             computerScore=0;
         }
+        function capitalize(string){
+            return string[0].toUpperCase() + string.slice(1).toLowerCase();
+        }
         
         function game(){
-            alert ('Game has started');
+            alert ('Game has started!');
             while ((playerScore<5)&&(computerScore<5)){
                 computerSelection = computerPlay();
                 playerSelection = playerPlay();
@@ -64,11 +67,11 @@
             }
             switch(true){
                 case playerScore>computerScore:
-                    console.log('You win! Congratulations!');
+                    alert('You win! Congratulations!');
                     console.log(`Final score: ${playerScore}-${computerScore}`);
                     break;
                 case computerScore>playerScore:
-                    console.log('Computer wins. Better luck next time!');
+                    alert('Computer wins. Better luck next time!');
                     console.log(`Final score: ${playerScore}-${computerScore}`);
                     break;
             }
