@@ -2,36 +2,39 @@
 <html>
     <head>
         <title>Dom Trial Page</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="Styles/reset.css">
+        <link rel="stylesheet" href="Styles/style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Lacquer&amp;family=Roboto&amp;display=swap" rel="stylesheet">
     </head>
     <body>
         <div class='container'>
-            <h1>Rock Paper Scissor!</h1>
+            <h1 id='title'>Rock Paper Scissor!</h1>
+            <h2>First to Five Win</h2>
+            <h2>Choose your Weapon!</h2>
             <div class='button-container'>
-                <button class='player-input' value='Rock'>Rock</button>
-                <button class='player-input' value='Paper'>Paper</button>
-                <button class='player-input' value='Scissor'>Scissor</button>
+                <div  class='player-input' id='Rock'>
+                    <img src="Images/cave-painting.png" alt="Rock">
+                </div>
+                <div  class='player-input' id='Paper'>
+                    <img src="Images/document.png" alt="Paper">
+                </div>
+                <div  class='player-input' id='Scissor'>
+                    <img src="Images/scissors-opened-tool-shape.png" alt="Scissor">
+                </div>
             </div>
-            <h2></h2>
-            <h3></h3>
+            <div class='score-Tally'>
+                <div class='Tally'>
+                    <h3>You</h3>
+                    <h3 id='playerScore'></h3>
+                </div>
+                <div class="Tally">
+                    <h3>Computer</h3>
+                    <h3 id='computerScore'></h3>
+                </div>
+            </div>
+            <h3 id="statusDisplay"></h3>
         </div>
     </body>
 </html>
-<style>
-    body {
-        margin: 0px;
-        box-sizing: border-box;
-        height: 100vh;
-    }
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-    }
-    button {
-        margin: 0px 50px;
-    }
-
-</style>
 <script src="Scripts/script.js"></script>

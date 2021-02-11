@@ -4,18 +4,20 @@ let computerScore = 0;
 
 let computerPlay = () => playArray[Math.floor(Math.random()*3)];
 
-const scoreDisplay = document.querySelector('h2');
-const statusDisplay = document.querySelector('h3');
-scoreDisplay.textContent = `Your score: ${playerScore} vs Computer score: ${computerScore}`;
+const scoreDisplayPlayer = document.querySelector('#playerScore');
+const scoreDisplayComputer = document.querySelector('#computerScore');
+const statusDisplay = document.querySelector('#statusDisplay');
+scoreDisplayPlayer.textContent = playerScore;
+scoreDisplayComputer.textContent = computerScore;
 const body = document.querySelector('body');
 const container = document.querySelector('.container');
-const newcointainer = document.createElement('div');
-newcointainer.classList.toggle('container');
+const newcontainer = document.createElement('div');
+newcontainer.classList.toggle('new-container');
 const reset = document.createElement('button');
-reset.textContent = 'Want To Play Again?';
+reset.textContent = 'Play Again?';
 const finalScore = document.createElement('h3');
 const winner = document.createElement('h2');
-newcointainer.append(winner,finalScore,reset);
+newcontainer.append(winner,finalScore,reset);
 
 function playRound(playerSelection,computerSelection){
     switch(true) {
@@ -35,17 +37,23 @@ function playRound(playerSelection,computerSelection){
 }
 
 const buttons = document.querySelectorAll('.player-input');
-buttons.forEach(button => {
-    button.addEventListener('click', ()=>{
-        playerSelection = button.value
+console.log(buttons)
+buttons.forEach(div => {
+    div.addEventListener('click', ()=>{
+        playerSelection = div.id
         game();
     });
 })
 function game(){
     computerSelection = computerPlay();
     statusDisplay.textContent=playRound(playerSelection,computerSelection);
-    scoreDisplay.textContent = `Your score: ${playerScore} vs Computer score: ${computerScore}`;
-    gameEnd();
+    scoreDisplayPlayer.textContent = playerScore;
+    scoreDisplayComputer.textContent = computerScore;
+    if (playerScore==5||computerScore==5){
+        body.removeChild(container);
+        winnerDisplay();
+        body.appendChild(newcontainer);       
+    }
 }
 function winnerDisplay(){
     switch(true){
@@ -58,18 +66,12 @@ function winnerDisplay(){
     }
     finalScore.textContent = `Final score: ${playerScore}-${computerScore}`;
 }
-function gameEnd (){
-    if (playerScore==5||computerScore==5){
-        body.removeChild(container);
-        winnerDisplay();
-        body.appendChild(newcointainer);       
-    }
-}
 reset.onclick = () => {
     playerScore=0;
     computerScore=0;
-    body.removeChild(newcointainer);
+    body.removeChild(newcontainer);
     body.appendChild(container);
-    scoreDisplay.textContent = `Your score: ${playerScore} vs Computer score: ${computerScore}`;
+    scoreDisplayPlayer.textContent = playerScore;
+scoreDisplayComputer.textContent = computerScore;
     statusDisplay.textContent='';   
 }
