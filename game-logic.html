@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rock Paper Scissor Game</title>
+    </head>
+    <script>
+
+        let playArray = ['Rock','Paper','Scissor']; 
+        let playerScore = 0;
+        let computerScore = 0;
+        
+        let computerPlay = () => playArray[Math.floor(Math.random()*3)];
+        
+        function playerPlay(){
+            playerHand = prompt('Rock, Paper, Scissors?');
+            if (playerHand==null||playerHand==''){
+                return playerHand;
+            }
+            else if(playArray.includes(capitalize(playerHand))){
+                return capitalize(playerHand);
+            }
+            else{
+                alert('Please pick from the choices!')
+                return playerPlay();
+            }  
+        }
+
+        function playRound(playerSelection,computerSelection){
+            switch(true) {
+                case playerSelection=='Rock' && computerSelection=='Scissor':
+                case playerSelection=='Paper' && computerSelection=='Rock':
+                case playerSelection=='Scissor' && computerSelection=='Paper':
+                    playerScore++;
+                    return (`You win! ${playerSelection} beats ${computerSelection}.`);
+                    break;
+                case playerSelection==computerSelection:
+                    return ('Tie Game!');
+                    break;
+                default:
+                    computerScore++;
+                    return (`You lose. ${computerSelection} beats ${playerSelection}.`);
+            }
+        }
+
+        function reset(){
+            playerScore=0;
+            computerScore=0;
+        }
+        function capitalize(string){
+            return string[0].toUpperCase() + string.slice(1).toLowerCase();
+        }
+        
+        function game(){
+            alert ('Game has started!');
+            while ((playerScore<5)&&(computerScore<5)){
+                computerSelection = computerPlay();
+                playerSelection = playerPlay();
+                if (playerSelection==null || playerSelection==''){
+                    alert('Game is cancelled!');
+                    reset();
+                    break;
+                }
+                else{
+                    console.log(playRound(playerSelection,computerSelection));
+                    console.log(`Your score: ${playerScore}  Computer score: ${computerScore}`);
+                }    
+            }
+            switch(true){
+                case playerScore>computerScore:
+                    alert('You win! Congratulations!');
+                    console.log(`Final score: ${playerScore}-${computerScore}`);
+                    break;
+                case computerScore>playerScore:
+                    alert('Computer wins. Better luck next time!');
+                    console.log(`Final score: ${playerScore}-${computerScore}`);
+                    break;
+            }
+            reset();
+            playAgain = prompt("Want to play again?");
+            playAgain.toLowerCase()=='yes' ? game() : alert('Thanks for playing!');   
+        }
+
+    </script>
+</html>
