@@ -39,13 +39,11 @@ function playRound(playerSelection,computerSelection){
 const buttons = document.querySelectorAll('.player-input');
 console.log(buttons)
 buttons.forEach(div => {
-    div.addEventListener('click', ()=>{
-        playerSelection = div.id
-        game();
-    });
+    div.addEventListener('click', game);
 })
-function game(){
+function game(e){
     computerSelection = computerPlay();
+    playerSelection = this.id;
     statusDisplay.textContent=playRound(playerSelection,computerSelection);
     scoreDisplayPlayer.textContent = playerScore;
     scoreDisplayComputer.textContent = computerScore;
